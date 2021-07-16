@@ -30,7 +30,7 @@
 
 只要你干过两三年编程，就有可能曾被某人的糟糕的代码绊倒过。
 
-有些团队在项目初期进展迅速，但有那么一两年的时间却慢如蜗行。
+有些团队在项目初期进展迅速，但过那么一两年的时间后却慢如蜗牛。
 
 这团乱麻越来越大，再也无法理清，最后束手无策。
 
@@ -82,7 +82,7 @@ Ron Jeffries，Extreme Programming Installed（中译版《极限编程实施》
 
 > Ron 初入行就在战略空军司令部（Strategic Air Command）编写 Fortran 程序，此后几乎在每种机器上编写过每种语言的代码。他的言论值得咀嚼。
 
-Ward Cunningham，Wiki 发明者，eXtreme Programming （极限编程）的创始人之一，Smalltalk 语言和面向对象的思想领袖。所有在意代码者的教父。
+Ward Cunningham，Wiki 发明者，eXtreme Programming （极限编程）的创始人之一，Smalltalk 语言和面向对象的思想领袖。所有在意代码质量者的教父。
 
 > 如果每个例程都让你感到深合己意，那就是整洁代码。如果代码让编程语言看起来像是专为解决那个问题而存在，就可以称之为漂亮的代码。
 
@@ -411,13 +411,13 @@ public class HttpRequest {
 
 - 在1980年代，普遍认为单个函数不应该超过20行。
 
-  理由是当时的显示器VT100一个屏幕叧能显示20行。
+  理由是当时的显示器VT100一个屏幕只能显示20行。
 
 - 现在我们认为一个好的函数不应该超过10行。
 
-### 2. 函数应该叧做一件事情！
+### 2. 函数应该只做一件事情！
 
-- 函数应该叧做一件事情，并且把它做好。
+- 函数应该只做一件事情，并且把它做好。
 - 如果函数包含多个段落，那么它就不止做了一件事情。
 - 如果函数包含多个抽象层次，那么他也不止做一件事情。
 
@@ -426,15 +426,15 @@ public class HttpRequest {
 
 ### 4. 关于提取函数的担忧
 
-- 小函数太多会丌会导致难于定位代码？
+- 小函数太多会不会导致难于定位代码？
   - 小函数需要有良好的命名。
   - 函数名就像路标，有好的名字，则越多越清晰。
 
-- 函数太多会丌会导致程序运行效率低下？
+- 函数太多会不会导致程序运行效率低下？
   - 对于大多数程序而言，代码整洁排在第一优先级。
   - 现代的编译器、运行时和硬件已经使这种差别忽略不计。
 
-- 把函数变小是丌是浪费时间？
+- 把函数变小是不是浪费时间？
   - 个人虽然花了更多时间，但是对整个团队和维护工作来说却节省了时间；
   - 维护成本比开发成本高
 
@@ -443,6 +443,8 @@ public class HttpRequest {
 -  自上而下法则
 
  我们在描述问题时，通常是按照从抽象到具体的顺序，逐层细化，直到无需解释的基本概念为止。  类似的，函数调用的入口应该是一个较抽象函数，它的内部调用更加具体的小函数，这些小函数内部又调用更具体的其他小函数，直到每一步都是一目了然的操作为止。
+
+![levels_of_abstraction](./image/levels_of_abstraction.png)
 
 ### 6. 消除switch语句
 
@@ -749,8 +751,7 @@ protected abstract Responder responderInstance();
 
 ```java
 // format matched kk:mm:ss EEE, MMM dd, yyyy
-Pattern timeMatcher = Pattern.compile(
-  “\\d*:\\d*:\\d* \\w*, \\w* \\d*, \\d*”);
+Pattern timeMatcher = Pattern.compile(“\\d*:\\d*:\\d* \\w*, \\w* \\d*, \\d*”);
 ```
 
 #### 3.3 阐明意图
@@ -843,8 +844,7 @@ public void _testWithReallyBigFile()
 ```
 
 ```java
-public static
-  SimpleDateFormat makeStandardHttpDateFormat()
+public static SimpleDateFormat makeStandardHttpDateFormat()
 {
   //SimpleDateFormat is not thread safe,
   //so we need to create each instance independently.
@@ -895,11 +895,9 @@ public void loadProperties()
 {
   try
   {
-  String propertiesPath = propertiesLocation +
-    ”/” + PROPERTIES_FILE;
-  FileInputStream propertiesStream = new
-    FileInputStream(propertiesPath);
-  loadedProperties.load(propertiesStream);
+    String propertiesPath = propertiesLocation +”/” + PROPERTIES_FILE;
+    FileInputStream propertiesStream = new FileInputStream(propertiesPath);
+    loadedProperties.load(propertiesStream);
   }
   catch(IOException e)
   {
@@ -913,8 +911,7 @@ public void loadProperties()
 代码清单展示的简单函数，其头部位置的注释全属多余。读这段注释花的时间没准比读代码花的时间还要长。
 
 ```java
-// Utility method that returns when this.closed
-    is true. Throws an exception
+// Utility method that returns when this.closed is true. Throws an exception
 // if the timeout is reached.
 public synchronized void waitForClose(final long timeoutMillis)
 throws Exception
@@ -1060,8 +1057,6 @@ if (moduleDependees.contains(ourSubSystem))
 ```
 
 #### 4.9 括号后面的注释
-
-
 
 有时，程序员会在括号后面放置特殊的注释，例如你想标记右括号，其实应该做的是缩短函数。
 
@@ -1209,7 +1204,7 @@ public void setFitnessePort(int fitnessePort)
 
 ### 1. 代码的格式是影响代码可读性重要因素
 
-先明确一下，代码格式很重要。代码格式不可忽略，必须严肃对待。代码格式关乎沟通，而沟通是专业开发者的头等大事。
+代码格式很重要, 必须严肃对待。代码格式关乎沟通，而沟通是专业开发者的头等大事。
 
 ### 2. 在一个团队内应该有统一的格式标准
 
@@ -1261,7 +1256,7 @@ static public void assertFalse(String message, boolean condition) { } static pub
 
 - 使用统一的代码风格模板，最好采用IDE的自动格式化功能；
 - 提交代码前应该格式化代码；
-- 调整代码风格标准后，重新格式化代码应该单独做一体提交；
+- 调整代码风格标准后，重新格式化代码应该单独做一次提交；
 - 不要留太多空行；
 
 ```java

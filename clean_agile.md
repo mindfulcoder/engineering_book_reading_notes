@@ -53,8 +53,11 @@ Robert C Martin和Martin Fowler在Thought Works附近的咖啡店会面，他向
 经过一天的讨论后，在众人的围绕下，Martin Fowler在白板上写下了如下4句话：
 
 > Individuals and interactions over processes and tools
+>
 > Working software over comprehensive documentation
+>
 > Customer collaboration over contract negotiation
+>
 > Responding to change over following a plan
 
 与会者都同意者四句话，但是他们没有想到一个合适的名字来描述这是什么。Robert C Martin想叫它“轻量级流程”，不过其他人都反对。各种各样的名字都冒出来，最终有人提了“敏捷”这个词，因为当时军队里流行这个词。没人喜欢“敏捷”这个词，但是因为没有更好的选项，所以只好叫它“敏捷”。
