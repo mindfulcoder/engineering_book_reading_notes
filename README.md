@@ -17,7 +17,7 @@
 ## 2.目录
 
 - [整洁代码](./clean_code.md)
-- [整洁架构](./clean_architecture.md)
+- [架构整洁之道](./clean_architecture.md)
 - [设计模式](./design_patterns.md)
 - [敏捷整洁之道](./clean_agile.md)
 - [敏捷软件开发，原则、模式和实践](./agile_software_development_principles_patterns_and_practices.md)

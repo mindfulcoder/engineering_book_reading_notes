@@ -68,7 +68,7 @@
 
 ## 9. 领域驱动与敏捷过程相结合
 
-领域驱动设计本身可以和敏捷相结合，体现"测试现行，逐步改进"的思路。
+领域驱动设计本身可以和敏捷相结合，体现"测试先行，逐步改进"的思路。
 
 比如，在开发一个新的实体对象时，可以：
 
@@ -175,7 +175,9 @@ public interface Customer {
 
 核心子域（Core Domain）是决定业务成败关键子域。
 
-支持子域（Supporting Domain）是重要但非核心的子域。通用子域（Generic Domain）是用于整个系统的子域。
+支持子域（Supporting Domain）是重要但非核心的子域。
+
+通用子域（Generic Domain）是用于整个系统的子域。
 
 例如，一个电商系统中，可能包含如下子域：产品目录（Product Catalog），订单（Order）、发票（Invoice）和物流（Shipping）。 
 
@@ -229,7 +231,7 @@ public interface Customer {
 
 上下文映射图可以用于解决集成问题，还可以促进团队之间的交流，甚至用于识别阻碍项目进展的管理问题。
 
-上下文隐身图不是一种企业架构图，也不是系统拓扑图，但是它可以用于高层次的架构分析，支持解决架构的不足。
+上下文映射图不是一种企业架构图，也不是系统拓扑图，但是它可以用于高层次的架构分析，支持解决架构的不足。
 
 ## 2. 绘制上下文映射图
 
@@ -317,16 +319,16 @@ public interface Customer {
 
 ### 2.2 应用层
 
-应用层中主要包含应用服务，应用服务本身并不处理领域相关的业务逻辑，他轻量的，用于对外协调对领域对象的操作。
+应用层中主要包含应用服务，应用服务本身并不处理领域相关的业务逻辑，他是轻量的，用于对外协调对领域对象的操作。
 
-应用服务时表达用例和用户故事的主要手段。
+应用服务是表达用例和用户故事的主要手段。
 
 应用层的通常用法是：
 
 - 接收来自于用户界面的输入参数，通过资源库（Repository）获取聚合实例，然后执行响应的命令操作；
 - 当需要创建新的聚合时，应用服务应该使用工厂或者聚合的构造方法来实例化对象，然后调用资源库对其进行持久化；
 - 应用服务还可以调用领域服务来完成领域相关的任务操作，但此时的操作应该是无状态的；
-- 应用服务还可以用于订阅领域事件，然后对领域事件进行存储的转发，这样可以是领域模型不依赖于消息机制和基础设施；
+- 应用服务还可以用于订阅领域事件，然后对领域事件进行存储的转发，这样可以使领域模型不依赖于消息机制和基础设施；
 
 样例代码：
 
@@ -361,13 +363,9 @@ public void commitBacklogItemToSprint(String aTenantId, String aBacklogItemId, S
 
 ## 3. 六边形架构
 
-六边形架构，也叫做端口与适配器，在这种架构中不同的外部用户以平等的方式与系统交互。对于每一种外部访问都存在
+六边形架构，也叫做端口与适配器，在这种架构中不同的外部用户以平等的方式与系统交互。对于每一种外部访问都存在一个适配器，适配器将外部请求转换为对内部API的调用。
 
-一个适配器，适配器将外部请求转换为对内部API的调用。
-
-六边形架构下，我们根据用例来设计应用程序，而不管客户。客户可以向不同端口发起请求，但是无论哪种请求都被适配器
-
-转换为对于内部API的调用。
+六边形架构下，我们根据用例来设计应用程序，而不管客户。客户可以向不同端口发起请求，但是无论哪种请求都被适配器转换为对于内部API的调用。
 
 ![ddd_hexagonal_arch.PNG](image/ddd_hexagonal_arch.PNG)
 
@@ -397,9 +395,7 @@ public void commitBacklogItemToSprint(String aTenantId, String aBacklogItemId, S
 
 REST也可以看做是一种架构风格，在这里我们不在赘述其特征。
 
-如果将Restful接口与领域驱动设计相结合，那么通常不能直接在Restful接口暴露领域模型。一种方法就是，为Restful接口创建一个
-
-界限上下文，在此上下文中访问实际的核心模型。
+如果将Restful接口与领域驱动设计相结合，那么通常不能直接在Restful接口暴露领域模型。一种方法就是，为Restful接口创建一个界限上下文，在此上下文中访问实际的核心模型。
 
 代码示例：
 
@@ -411,7 +407,8 @@ public class ProductResource extends Resource {
     @GET
     @Path("{productId}")
     @Produces({"application/xml"})
-    public Product getProduct(@PathParam("tenantId") String aTenantId,                                                 @PathParam("productId") String aProductId, 
+    public Product getProduct(@PathParam("tenantId") String aTenantId,                                                      
+                              @PathParam("productId") String aProductId, 
                               @Context Request aRequest) {
             Product product = productService.product(aTenantId, aProductId);
             if (product == null) {
